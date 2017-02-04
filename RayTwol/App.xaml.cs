@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading;
+using System.Windows.Threading;
 
 namespace RayTwol
 {
@@ -10,7 +12,7 @@ namespace RayTwol
         [STAThread]
         public static void Main(string[] args)
         {
-            Editor.Init();
+            new MainWindow(Console.ReadLine()).ShowDialog();
         }
     }
 }

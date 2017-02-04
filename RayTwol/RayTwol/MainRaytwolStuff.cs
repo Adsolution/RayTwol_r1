@@ -19,17 +19,6 @@ namespace RayTwol
         {
             objectsList.SelectedIndex = -1;
             objectsList.Items.Clear();
-            label_EntityCount.Content = Editor.entities.Count.ToString() + "  Objects found";
-
-            // Update objects list
-            foreach (Entity entity in Editor.entities)
-            {
-                ListViewItem ent = new ListViewItem();
-                ent.Content = entity.name;
-                ent.Tag = entity.ID;
-                objectsList.Items.Add(ent);
-            }
-            Gizmos.Create();
         }
 
 
@@ -46,11 +35,9 @@ namespace RayTwol
         // CHANGE LEVEL
         void dropdown_Levels_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Editor.OpenLevel(Editor.levelFiles[dropdown_Levels.SelectedIndex]);
-            dropdown_Levels.MoveFocus(new System.Windows.Input.TraversalRequest(System.Windows.Input.FocusNavigationDirection.Previous));
         }
         
-
+        
         // FILE
         void button_Revert_Click(object sender, RoutedEventArgs e)
         {
@@ -59,13 +46,13 @@ namespace RayTwol
         }
         void button_Fetch_Click(object sender, RoutedEventArgs e)
         {
-            if (Editor.currLevel != null && File.Exists(Editor.currLevel.FullName + "_HOLD"))
-                Editor.OpenLevel(Editor.currLevel, "_HOLD");
+            //if (Editor.currLevel != null && File.Exists(Editor.currLevel.FullName + "_HOLD"))
+                //Editor.OpenLevel(Editor.currLevel, "_HOLD");
         }
         void button_Hold_Click(object sender, RoutedEventArgs e)
         {
-            if (Editor.currLevel != null)
-                Editor.SaveLevel("_HOLD");
+            //if (Editor.currLevel != null)
+                //Editor.SaveLevel("_HOLD");
         }
         void button_Save_click(object sender, RoutedEventArgs e)
         {
@@ -76,7 +63,7 @@ namespace RayTwol
 
         // RUN/SYNC GAME
         private void button_Run_Click(object sender, RoutedEventArgs e)
-        {
+        {/*
             if (Process.GetProcessesByName("Rayman2").Length == 0)
             {
                 var r2 = new ProcessStartInfo();
@@ -98,8 +85,8 @@ namespace RayTwol
                 {
                     Memory.isSynced = false;
                 }
-            }
-        }
+            }*/
+        }/*
         void CheckIfGameRunning(object sender, ElapsedEventArgs e)
         {
             if (Process.GetProcessesByName("Rayman2").Length == 0)
@@ -114,26 +101,18 @@ namespace RayTwol
             if (Memory.isSynced)
                 Memory.runButtonText = "DESYNC";
         }
-
-
+        */
+        
         // OPEN HELP
         void button_Help_Click(object sender, RoutedEventArgs e)
-        {
+        {/*
             if (!Global.viewingHelp)
             {
                 Global.help = new Help();
                 Global.help.Show();
             }
             else
-                Global.help.Focus();
-        }
-        void Window_ContentRendered(object sender, EventArgs e)
-        {
-            if (Setup.firstTime)
-            {
-                Global.help = new Help();
-                Global.help.Show();
-            }
+                Global.help.Focus();*/
         }
     }
 }

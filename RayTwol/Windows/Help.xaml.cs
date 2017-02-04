@@ -30,15 +30,15 @@ namespace RayTwol
                 textBlock.Text = readme.ReadToEnd();
             }
         }
-
+        
         void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            Global.viewingHelp = false;
+            //Global.viewingHelp = false;
         }
 
         void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Global.viewingHelp = true;
+            //Global.viewingHelp = true;
         }
     }
 }
