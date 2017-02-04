@@ -60,7 +60,7 @@ namespace RayTwol
         }
 
         public static bool displayGraphics = true;
-        public static bool displayCollision = true;
+        public static bool displayCollision = false;
 
         public static string ExtractDir = "tiles";
         public static Collisions selectedType = Collisions.type_solid;
@@ -191,7 +191,7 @@ namespace RayTwol
             Directory.CreateDirectory(string.Format("{0}\\{1}", Editor.ExtractDir, world));
             int buffPos = off_tiles;
             int tile = 0;
-            for (int fy = 0; fy < 33; fy++, buffPos += 256 * 15)
+            for (int fy = 0; fy < (off_palette - off_tiles) / 4096; fy++, buffPos += 256 * 15)
                 for (int fx = 0; fx < 16; fx++, buffPos -= 0xFF0, tile++)
                 {
                     var bmp = new Bitmap(16, 16, System.Drawing.Imaging.PixelFormat.Format8bppIndexed);
@@ -209,14 +209,18 @@ namespace RayTwol
                     System.Drawing.Color[] entries = palette.Entries;
 
                     // Assign palette
-                    for (int c = 0; c < 256; c++)
+                    try
                     {
-                        byte r = palettes[file[off_assign + tile]][c].R;
-                        byte g = palettes[file[off_assign + tile]][c].G;
-                        byte b = palettes[file[off_assign + tile]][c].B;
-                        entries[c] = System.Drawing.Color.FromArgb(r, g, b);
-                        bmp.Palette = palette;
+                        for (int c = 0; c < 256; c++)
+                        {
+                            byte r = palettes[file[off_assign + tile]][c].R;
+                            byte g = palettes[file[off_assign + tile]][c].G;
+                            byte b = palettes[file[off_assign + tile]][c].B;
+                            entries[c] = System.Drawing.Color.FromArgb(r, g, b);
+                            bmp.Palette = palette;
+                        }
                     }
+                    catch { }
 
                     bmp.MakeTransparent(System.Drawing.Color.FromArgb(0, 0, 0));
                     bmp.Save(string.Format("{0}\\{1}\\{3}_{2}.png", Editor.ExtractDir, world, fx, fy), ImageFormat.Png);
