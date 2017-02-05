@@ -317,6 +317,12 @@ namespace RayTwol
                 Editor.gridEnabled = true;*/
         }
 
+        private void button_collision_click(object sender, RoutedEventArgs e)
+        {
+            Editor.displayCollision = !Editor.displayCollision;
+            Refresh();
+
+        }
 
         void viewport_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -376,8 +382,5 @@ namespace RayTwol
 
             Input.Changed();
         }
-
-
-
     }
 }
