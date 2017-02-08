@@ -68,13 +68,18 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RayTwol\Extract.cs" />
+    <Compile Include="RayTwol\LoadSave.cs" />
+    <Compile Include="RayTwol\TypesEdit.cs" />
+    <Compile Include="RayTwol\TypesSelect.cs" />
     <Compile Include="RayTwol\Input.cs" />
     <Compile Include="RayTwol\Objects.cs" />
     <Compile Include="RayTwol\Editor.cs" />
+    <Compile Include="RayTwol\Rendering.cs" />
     <Compile Include="Windows\Help.xaml.cs">
       <DependentUpon>Help.xaml</DependentUpon>
     </Compile>
-    <Compile Include="RayTwol\MainRaytwolStuff.cs" />
+    <Compile Include="RayTwol\Buttons.cs" />
     <Compile Include="Windows\Replace.xaml.cs">
       <DependentUpon>Replace.xaml</DependentUpon>
     </Compile>
@@ -136,6 +141,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\Debug\" />
+    <Folder Include="templates\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="icont512.ico" />

@@ -12,6 +12,7 @@ namespace RayTwol
         [STAThread]
         public static void Main(string[] args)
         {
+            //Editor.ExtractBackground(Console.ReadLine().ToUpper());
             new MainWindow(Console.ReadLine()).ShowDialog();
         }
     }

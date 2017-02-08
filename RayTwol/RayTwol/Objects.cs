@@ -2,16 +2,28 @@
 
 namespace RayTwol
 {
-    public static class Level
+    public class TypeGroup
     {
-        public static string world;
-        public static string name;
-        public static int width;
-        public static int height;
-        
-        public static int off_types;
+        public int width;
+        public int height;
+        public Type[] types;
+        public Type[] undo;
 
-        public static Type[] types;
+        public Type GetType(int x, int y)
+        {
+            return types[x + (y * width)];
+        }
+
+        public TypeGroup()
+        {
+        }
+
+        public TypeGroup(int width, int height)
+        {
+            this.width = width;
+            this.height = height;
+            types = new Type[width * height];
+        }
     }
 
     public struct Type

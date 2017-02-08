@@ -360,7 +360,7 @@
                     <Image Source="/editor;component/gfx/types/type_slippery_steep_left.png" />
                 </StackPanel>
             </Button>
-            <Button x:Name="type_slippery_steep_right1" HorizontalAlignment="Left" Margin="403,0,0,105" Width="26" BorderBrush="#FF411E3F" FontSize="16" FontWeight="Bold" Click="button_type_slippery_steep_right_Click" Height="26" VerticalAlignment="Bottom" Foreground="{x:Null}">
+            <Button x:Name="type_slippery_steep_right1" HorizontalAlignment="Left" Margin="403,0,0,105" Width="26" BorderBrush="#FF411E3F" FontSize="16" FontWeight="Bold" Click="button_type_slippery_steep_right1_Click" Height="26" VerticalAlignment="Bottom" Foreground="{x:Null}">
                 <Button.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="#FF1D0918" Offset="1"/>

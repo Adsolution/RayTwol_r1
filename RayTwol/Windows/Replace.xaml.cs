@@ -54,7 +54,7 @@ namespace RayTwol
         }
         void button_type_hill_slight_right_1_Click(object sender, RoutedEventArgs e)
         {
-            textbox_type1.Text = Enum.GetName(typeof(Collisions), Collisions.type_passthrough);
+            textbox_type1.Text = Enum.GetName(typeof(Collisions), Collisions.type_hill_slight_right_1);
         }
         void button_type_slippery_Click(object sender, RoutedEventArgs e)
         {
@@ -145,7 +145,7 @@ namespace RayTwol
         }
         void button_type_hill_slight_right_11_Click(object sender, RoutedEventArgs e)
         {
-            textbox_type2.Text = Enum.GetName(typeof(Collisions), Collisions.type_passthrough);
+            textbox_type2.Text = Enum.GetName(typeof(Collisions), Collisions.type_hill_slight_right_1);
         }
         void button_type_slippery1_Click(object sender, RoutedEventArgs e)
         {
@@ -210,14 +210,12 @@ namespace RayTwol
         {
             Collisions coll1 = (Collisions)Enum.Parse(typeof(Collisions), textbox_type1.Text);
             Collisions coll2 = (Collisions)Enum.Parse(typeof(Collisions), textbox_type2.Text);
-            //DialogResult = false;
 
-            for (int i = 0; i < Level.types.Length; i++)
-                if (Level.types[i].collision == coll1)
-                {
-                    Level.types[i].collision = coll2;
-                    //DialogResult = true;
-                }
+            Editor.activeTypeGroup.undo = Editor.activeTypeGroup.types.ToArray();
+
+            for (int i = 0; i < Editor.activeTypeGroup.types.Length; i++)
+                if (Editor.activeTypeGroup.types[i].collision == coll1)
+                    Editor.activeTypeGroup.types[i].collision = coll2;
                 
             Close();
         }
