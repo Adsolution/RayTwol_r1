@@ -69,7 +69,7 @@ namespace RayTwol
             if (e.Key == Key.Delete) Input.DEL = true;
             if (e.Key == Key.Space) Input.SPACE = true;
 
-            if (Input.C)
+            if (Input.R)
                 Editor.viewingTemplate = !Editor.viewingTemplate;
             /*
             if (Input.T)
@@ -126,13 +126,13 @@ namespace RayTwol
 
             int x = (int)e.GetPosition(viewport).X;
             int y = (int)e.GetPosition(viewport).Y;
-            
+            /*
             if (x < Editor.activeTypeGroup.width * 16 && y < Editor.activeTypeGroup.height * 16)
             {
                 label_mgraphic.Margin = new Thickness(x + 10, y + 18, x + label_mgraphic.ActualWidth, y + label_mgraphic.ActualHeight);
                 Type mouseType = Editor.activeTypeGroup.types[((x / 16) + ((y / 16) * Editor.activeTypeGroup.width))];
                 label_mgraphic.Text = mouseType.graphic.X + ", " + mouseType.graphic.Y + "\n" + mouseType.collision;
-            }
+            }*/
 
             Input.Changed();
         }

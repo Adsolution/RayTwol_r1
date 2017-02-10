@@ -1,11 +1,13 @@
-﻿using System.Drawing;
+﻿using System.Collections.Generic;
+using System.Drawing;
 
 namespace RayTwol
 {
-    public class TypeGroup
+    public class Scene
     {
         public int width;
         public int height;
+        public List<Event> events = new List<Event>();
         public Type[] types;
         public Type[] undo;
 
@@ -14,11 +16,11 @@ namespace RayTwol
             return types[x + (y * width)];
         }
 
-        public TypeGroup()
+        public Scene()
         {
         }
 
-        public TypeGroup(int width, int height)
+        public Scene(int width, int height)
         {
             this.width = width;
             this.height = height;
@@ -30,5 +32,11 @@ namespace RayTwol
     {
         public Point graphic;
         public Collisions collision;
+    }
+
+    public class Event
+    {
+        public Point position = new Point(0, 0);
+        public byte[] bytes = new byte[112];
     }
 }

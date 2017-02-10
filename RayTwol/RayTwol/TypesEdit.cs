@@ -10,7 +10,7 @@ namespace RayTwol
         {
             undo = activeTypeGroup.types.ToArray();
             int selWidth = x2 - x1;
-            var clip = TypeGroups.Clipboard;
+            var clip = Scenes.Clipboard;
             for (int y = 0; y < y2 - y1; y++)
                 for (int x = 0; x < x2 - x1; x++)
                     activeTypeGroup.types[(x + x1) + ((y + y1) * activeTypeGroup.width)] = new Type();
@@ -32,23 +32,23 @@ namespace RayTwol
         {
             int cWidth = x2 - x1;
             int cHeight = y2 - y1;
-            TypeGroups.Clipboard.width = cWidth;
-            TypeGroups.Clipboard.height = cHeight;
+            Scenes.Clipboard.width = cWidth;
+            Scenes.Clipboard.height = cHeight;
 
-            TypeGroups.Clipboard.types = new Type[cWidth * cHeight];
+            Scenes.Clipboard.types = new Type[cWidth * cHeight];
             for (int y = 0; y < y2 - y1; y++)
                 for (int x = 0; x < x2 - x1; x++)
-                    TypeGroups.Clipboard.types[x + (y * cWidth)] = activeTypeGroup.types[(x1 + (y1 * activeTypeGroup.width)) + (x + (y * activeTypeGroup.width))];
+                    Scenes.Clipboard.types[x + (y * cWidth)] = activeTypeGroup.types[(x1 + (y1 * activeTypeGroup.width)) + (x + (y * activeTypeGroup.width))];
         }
 
 
         public static void Types_SetFromClipboard(int x1, int y1, int x2, int y2)
         {
-            if (TypeGroups.Clipboard.types != null)
+            if (Scenes.Clipboard.types != null)
             {
                 undo = activeTypeGroup.types.ToArray();
                 int selWidth = x2 - x1;
-                var clip = TypeGroups.Clipboard;
+                var clip = Scenes.Clipboard;
                 for (int y = 0; y < y2 - y1; y++)
                     for (int x = 0; x < x2 - x1; x++)
                     {
@@ -64,13 +64,13 @@ namespace RayTwol
 
         public static void Types_SetFromClipboardTemp(int x1, int y1, int x2, int y2)
         {
-            if (TypeGroups.Clipboard.types != null)
+            if (Scenes.Clipboard.types != null)
             {
-                TypeGroups.Temp.types = activeTypeGroup.types.ToArray();
-                TypeGroups.Temp.width = activeTypeGroup.width;
-                TypeGroups.Temp.height = activeTypeGroup.height;
+                Scenes.Temp.types = activeTypeGroup.types.ToArray();
+                Scenes.Temp.width = activeTypeGroup.width;
+                Scenes.Temp.height = activeTypeGroup.height;
                 int selWidth = x2 - x1;
-                var clip = TypeGroups.Clipboard;
+                var clip = Scenes.Clipboard;
 
                 for (int y = 0; y < y2 - y1; y++)
                     for (int x = 0; x < x2 - x1; x++)
@@ -80,9 +80,9 @@ namespace RayTwol
                             activeTypeGroup.types[(x + x1) + ((y + y1) * activeTypeGroup.width)] = type;
                     }
                 Refresh();
-                activeTypeGroup.types = TypeGroups.Temp.types.ToArray();
-                activeTypeGroup.width = TypeGroups.Temp.width;
-                activeTypeGroup.height = TypeGroups.Temp.height;
+                activeTypeGroup.types = Scenes.Temp.types.ToArray();
+                activeTypeGroup.width = Scenes.Temp.width;
+                activeTypeGroup.height = Scenes.Temp.height;
             }
         }
     }

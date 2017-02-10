@@ -62,6 +62,8 @@ namespace RayTwol
 
     public static partial class Editor
     {
+        public static MainWindow mainWindow;
+
         public static EditMode editMode = EditMode.Graphics;
 
         public static bool hasSelection;
@@ -69,7 +71,6 @@ namespace RayTwol
         public static string world;
         public static Type[] types_screen;
         public static Bitmap tileset;
-        public static int off_types;
 
         static bool _viewingTemplate;
         public static bool viewingTemplate
@@ -82,17 +83,17 @@ namespace RayTwol
             {
                 _viewingTemplate = value;
                 if (value)
-                    activeTypeGroup = TypeGroups.Template;
+                    activeTypeGroup = Scenes.Template;
                 else
-                    activeTypeGroup = TypeGroups.Level;
+                    activeTypeGroup = Scenes.Level;
             }
         }
 
         public static Type[] undo;
         public static List<Type[]> undos = new List<Type[]>();
 
-        static TypeGroup _activeTypeGroup;
-        public static TypeGroup activeTypeGroup
+        static Scene _activeTypeGroup;
+        public static Scene activeTypeGroup
         {
             get
             {
@@ -109,13 +110,13 @@ namespace RayTwol
             }
         }
 
-        public static class TypeGroups
+        public static class Scenes
         {
-            public static TypeGroup Level = new TypeGroup();
-            public static TypeGroup Template = new TypeGroup(70, 40);
-            public static TypeGroup Tileset = new TypeGroup();
-            public static TypeGroup Clipboard = new TypeGroup();
-            public static TypeGroup Temp = new TypeGroup();
+            public static Scene Level = new Scene();
+            public static Scene Template = new Scene(0, 0);
+            public static Scene Tileset = new Scene();
+            public static Scene Clipboard = new Scene();
+            public static Scene Temp = new Scene();
         }
 
         public static string ExtractDir = "r1\\tiles";

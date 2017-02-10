@@ -13,7 +13,8 @@ namespace RayTwol
         public static void Main(string[] args)
         {
             //Editor.ExtractBackground(Console.ReadLine().ToUpper());
-            new MainWindow(Console.ReadLine()).ShowDialog();
+            Editor.mainWindow = new MainWindow();
+            Editor.mainWindow.ShowDialog();
         }
     }
 }

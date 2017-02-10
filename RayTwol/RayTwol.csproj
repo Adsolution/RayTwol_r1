@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{E9C0E5C7-93B9-4D5E-BE9C-254D03252F49}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>RayTwol</RootNamespace>
     <AssemblyName>editor</AssemblyName>
@@ -80,6 +80,9 @@
       <DependentUpon>Help.xaml</DependentUpon>
     </Compile>
     <Compile Include="RayTwol\Buttons.cs" />
+    <Compile Include="Windows\OpenLevel.xaml.cs">
+      <DependentUpon>OpenLevel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Replace.xaml.cs">
       <DependentUpon>Replace.xaml</DependentUpon>
     </Compile>
@@ -102,6 +105,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Windows\OpenLevel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\Replace.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -73,9 +73,8 @@ namespace RayTwol
                 Rendering.display = new WriteableBitmap(Editor.activeTypeGroup.width * 16, Editor.activeTypeGroup.height * 16, 96, 96, PixelFormats.Rgb24, null);
                 Editor.types_screen = new Type[Editor.activeTypeGroup.types.Length];
             }
-
-
-            // Display GRAPHICS
+            
+            // Types
             for (int y = y1; y < y2; y++)
                 for (int x = x1; x < x2; x++)
                 {
@@ -107,12 +106,28 @@ namespace RayTwol
                     }
                 }
 
+            // Events
+            viewport_canvas.Children.Clear();
+            viewport_canvas.Children.Add(Editor.selSquare);
+            foreach (Event e in Editor.activeTypeGroup.events)
+            {
+                var ev = new System.Windows.Shapes.Ellipse();
+                int size = 9;
+                ev.Width = size;
+                ev.Height = size;
+                ev.Margin = new Thickness(e.position.X, e.position.Y, 0, 0);
+                ev.Stroke = new SolidColorBrush(System.Windows.Media.Color.FromArgb(255, 255, 255, 255));
+                ev.StrokeThickness = 2;
+                viewport_canvas.Children.Add(ev);
+            }
+
+
             Editor.types_screen = Editor.activeTypeGroup.types.ToArray();
 
             Rendering.Render();
             viewport.Source = Rendering.display;
 
-            label_mapsize.Content = Editor.activeTypeGroup.width + "×" + Editor.TypeGroups.Level.height;
+            label_mapsize.Content = Editor.activeTypeGroup.width + "×" + Editor.Scenes.Level.height;
             label_mapname.Content = Editor.currLevel;
         }
     }

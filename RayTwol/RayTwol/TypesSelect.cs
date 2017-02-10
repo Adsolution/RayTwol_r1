@@ -5,6 +5,8 @@ namespace RayTwol
 {
     public static partial class Editor
     {
+
+
         public static System.Windows.Shapes.Rectangle selSquare = new System.Windows.Shapes.Rectangle();
         public static SolidColorBrush brush_select = new SolidColorBrush();
         public static SolidColorBrush brush_create = new SolidColorBrush();
