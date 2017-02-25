@@ -27,12 +27,75 @@ namespace RayTwol
 
         void objectsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            if (objectsList.SelectedIndex > -1)
+            {
+                Event.DeselectAll();
+                Editor.Scenes.Level.events[objectsList.SelectedIndex].selected = true;
+                Editor.selectedEventsCount = 1;
+                Editor.RefreshObjectInfo();
+                RefreshEvents();
+            }
         }
 
         void Window_Loaded(object sender, RoutedEventArgs e)
         {
             new OpenLevel().ShowDialog();
+        }
+
+
+
+
+
+        void togglebutton_events_Click(object sender, RoutedEventArgs e)
+        {
+            Editor.editMode = EditMode.Events;
+        }
+        void togglebutton_graphics_Click(object sender, RoutedEventArgs e)
+        {
+            Editor.editMode = EditMode.Graphics;
+        }
+        void togglebutton_collision_Click(object sender, RoutedEventArgs e)
+        {
+            Editor.editMode = EditMode.Collision;
+        }
+
+
+
+
+
+
+        void textbox_ObjPosX_LostFocus(object sender, RoutedEventArgs e)
+        {
+            Event.SetTextboxPos();
+        }
+        void textbox_ObjPosY_LostFocus(object sender, RoutedEventArgs e)
+        {
+            Event.SetTextboxPos();
+        }
+        void textbox_ObjPosY_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            //Event.SetTextboxPos();
+        }
+        void textbox_ObjPosX_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            //Event.SetTextboxPos();
+        }
+
+        private void button_AddEvent_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void button_EditEventBytes_click(object sender, RoutedEventArgs e)
+        {
+            if (Editor.selectedEvent != null)
+                new EditBytes(Editor.selectedEvent).ShowDialog();
+        }
+
+        private void button_EditEventType_click(object sender, RoutedEventArgs e)
+        {
+            var eventSelect = new EventSelect();
+            eventSelect.ShowDialog();
         }
     }
 }

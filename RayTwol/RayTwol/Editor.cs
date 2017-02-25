@@ -22,11 +22,34 @@ namespace RayTwol
             else
                 return 0;
         }
+        
+        public static System.Drawing.Point GridSnap(System.Drawing.Point point)
+        {
+            return new System.Drawing.Point(((point.X + 8) / 16) * 16, ((point.Y + 8) / 16) * 16);
+        }
+
+        public static byte[] InsertBytes(byte[] inBytes, byte[] insertBytes, int insertInPos)
+        {
+            var insertLen = insertBytes.Length - 1;
+            var outBytes = new byte[inBytes.Length + insertLen + 1];
+            var outLen = outBytes.Length - 1;
+            for (int i = 0, j = 0; i < outLen; ++i)
+            {
+                if (i < insertInPos)
+                    outBytes[i] = inBytes[i];
+                else if (i == insertInPos)
+                    while (j <= insertLen)
+                        outBytes[i + j] = insertBytes[j++];
+                else
+                    outBytes[i + insertLen] = inBytes[i - insertLen];
+            }
+            return outBytes;
+        }
     }
 
     public enum EditMode
     {
-        Graphics, Collision
+        Events, Graphics, Collision
     }
     public enum SelectModes
     {
@@ -58,13 +81,82 @@ namespace RayTwol
         type_water = 10,
         type_event = 1
     }
+
+    public enum Behaviours
+    {
+        //_property = 0x3,
+
+        SpriteAnim = 0x04,
+
+        Ting = 0xA1,
+        OneUp = 0x8E,
+        SuperPower = 0x52,
+        Photographer = 0x15,
+
+        Cage = 0x3A,
+
+        Cloud_Disappearing = 0x1A,
+        Cloud_Bouncy = 0x1B,
+        Cloud_Flashing = 0x1C,
+
+        PricklyBall = 0x29,
+        RedDrummer = 0x78,
+        
+        Ring = 0x8C,
+
+        MapSign = 0x7C,
+        ExitSign = 0x2A,
+        Gendoor = 0xA4,
+
+        Sharpener = 0x01,
+
+        YinYang = 0xB1,
+        YinYang_Spiked = 0x06,
+
+        Pencil_Up_Moving = 0xF1,
+        Pencil_Up_Moving_Seq = 0xF2,
+        Pencil_Down_Moving = 0xB2,
+        Pencil_Down_Moving_Seq = 0xB3,
+        Pen = 0xF3
+    }
     
 
     public static partial class Editor
     {
         public static MainWindow mainWindow;
 
-        public static EditMode editMode = EditMode.Graphics;
+        static EditMode _editMode;
+        public static EditMode editMode
+        {
+            get
+            {
+                return _editMode;
+            }
+            set
+            {
+                _editMode = value;
+                switch (value)
+                {
+                    case EditMode.Events:
+                        mainWindow.togglebutton_events.IsChecked = true;
+                        mainWindow.togglebutton_graphics.IsChecked = false;
+                        mainWindow.togglebutton_collision.IsChecked = false;
+                        break;
+                    case EditMode.Graphics:
+                        mainWindow.togglebutton_events.IsChecked = false;
+                        mainWindow.togglebutton_graphics.IsChecked = true;
+                        mainWindow.togglebutton_collision.IsChecked = false;
+                        break;
+                    case EditMode.Collision:
+                        mainWindow.togglebutton_events.IsChecked = false;
+                        mainWindow.togglebutton_graphics.IsChecked = false;
+                        mainWindow.togglebutton_collision.IsChecked = true;
+                        break;
+                }
+                selSquare.Stroke = brush_hidden;
+                Refresh(true);
+            }
+        }
 
         public static bool hasSelection;
         public static string levelName;
@@ -110,6 +202,10 @@ namespace RayTwol
             }
         }
 
+        public static List<Event> selectedEvents = new List<Event>();
+        public static Event selectedEvent;
+        public static int selectedEventsCount;
+
         public static class Scenes
         {
             public static Scene Level = new Scene();
@@ -147,7 +243,7 @@ namespace RayTwol
             if (force)
             {
                 Rendering.display = new WriteableBitmap(Editor.activeTypeGroup.width * 16, Editor.activeTypeGroup.height * 16, 96, 96, PixelFormats.Rgb24, null);
-                Editor.types_screen = new Type[Editor.activeTypeGroup.types.Length];
+                types_screen = new Type[activeTypeGroup.types.Length];
             }
 
             UpdateViewport(null, EventArgs.Empty);

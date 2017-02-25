@@ -9,7 +9,9 @@ namespace RayTwol
     public static class Input
     {
         public static bool A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z,
+            D1, D2, D3, D4, D5, D6, D7, D8, D9, D0,
             CTRL, SHIFT, ALT, SPACE, TAB, DEL,
+            UP, DOWN, LEFT, RIGHT,
             MouseLeft, MouseRight, MouseMiddle;
 
         public static void Changed()
@@ -41,15 +43,60 @@ namespace RayTwol
             if (Editor.hasSelection)
             {
                 if (DEL)
-                    Editor.Types_BlankOut(Editor.sel1.X / 16, Editor.sel1.Y / 16, Editor.sel2.X / 16, Editor.sel2.Y / 16);
+                    Type.BlankOut(Editor.sel1.X / 16, Editor.sel1.Y / 16, Editor.sel2.X / 16, Editor.sel2.Y / 16);
                 if (CTRL && C)
-                    Editor.Types_Copy(Editor.sel1.X / 16, Editor.sel1.Y / 16, Editor.sel2.X / 16, Editor.sel2.Y / 16);
+                    Type.Copy(Editor.sel1.X / 16, Editor.sel1.Y / 16, Editor.sel2.X / 16, Editor.sel2.Y / 16);
                 if (CTRL && X)
                 {
-                    Editor.Types_Copy(Editor.sel1.X / 16, Editor.sel1.Y / 16, Editor.sel2.X / 16, Editor.sel2.Y / 16);
-                    Editor.Types_BlankOut(Editor.sel1.X / 16, Editor.sel1.Y / 16, Editor.sel2.X / 16, Editor.sel2.Y / 16);
+                    Type.Copy(Editor.sel1.X / 16, Editor.sel1.Y / 16, Editor.sel2.X / 16, Editor.sel2.Y / 16);
+                    Type.BlankOut(Editor.sel1.X / 16, Editor.sel1.Y / 16, Editor.sel2.X / 16, Editor.sel2.Y / 16);
                 }
             }
+
+            if (Editor.selectedEventsCount > 0)
+                foreach (Event e in Editor.Scenes.Level.events)
+                {
+                    if (e.selected && (UP || DOWN || LEFT || RIGHT))
+                    {
+                        if (UP)
+                            e.position.Y -= 1;
+                        if (DOWN)
+                            e.position.Y += 1;
+                        if (LEFT)
+                            e.position.X -= 1;
+                        if (RIGHT)
+                            e.position.X += 1;
+                        Editor.mainWindow.RefreshEvents();
+                        Editor.RefreshObjectInfo();
+                    }
+                }
+
+
+            if (Editor.selectedEventsCount > 0)
+                if (DEL)
+                {
+                    int i = 0;
+                    while (i < Editor.Scenes.Level.events.Count)
+                    {
+                        Event e = Editor.Scenes.Level.events[i];
+                        if (e.selected)
+                        {
+                            Editor.Scenes.Level.events.RemoveAt(e.ID);
+                            foreach (Event eu in Editor.Scenes.Level.events)
+                                if (eu.ID > e.ID)
+                                    eu.ID--;
+                        }
+                            
+                        else
+                            i++;
+                            
+                    }
+                    Editor.selectedEventsCount = 0;
+                    Editor.selectedEvent = null;
+                    Editor.RefreshObjectsList();
+                    Editor.ClearObjectInfo();
+                    Editor.mainWindow.RefreshEvents();
+                }
         }
     }
 
@@ -59,6 +106,9 @@ namespace RayTwol
     {
         void KeyPressed(object sender, KeyEventArgs e)
         {
+            if (e.Key == Key.D1) Input.D1 = true;
+            if (e.Key == Key.D2) Input.D2 = true;
+            if (e.Key == Key.D3) Input.D3 = true;
             if (e.Key == Key.C) Input.C = true;
             if (e.Key == Key.E) Input.E = true;
             if (e.Key == Key.R) Input.R = true;
@@ -66,11 +116,24 @@ namespace RayTwol
             if (e.Key == Key.X) Input.X = true;
             if (e.Key == Key.Z) Input.Z = true;
             if (e.Key == Key.LeftCtrl) Input.CTRL = true;
+            if (e.Key == Key.LeftShift) Input.SHIFT = true;
             if (e.Key == Key.Delete) Input.DEL = true;
             if (e.Key == Key.Space) Input.SPACE = true;
 
+            if (e.Key == Key.W) Input.UP = true;
+            if (e.Key == Key.S) Input.DOWN = true;
+            if (e.Key == Key.A) Input.LEFT = true;
+            if (e.Key == Key.D) Input.RIGHT = true;
+
             if (Input.R)
                 Editor.viewingTemplate = !Editor.viewingTemplate;
+            /*
+            if (Input.D1)
+                Editor.editMode = EditMode.Events;
+            if (Input.D2)
+                Editor.editMode = EditMode.Graphics;
+            if (Input.D3)
+                Editor.editMode = EditMode.Collision;
             /*
             if (Input.T)
                 Editor.activeTypeGroup = Editor.TypeGroups.Tileset;
@@ -83,6 +146,9 @@ namespace RayTwol
         }
         void KeyReleased(object sender, KeyEventArgs e)
         {
+            if (e.Key == Key.D1) Input.D1 = false;
+            if (e.Key == Key.D2) Input.D2 = false;
+            if (e.Key == Key.D3) Input.D3 = false;
             if (e.Key == Key.C) Input.C = false;
             if (e.Key == Key.E) Input.E = false;
             if (e.Key == Key.R) Input.R = false;
@@ -90,8 +156,14 @@ namespace RayTwol
             if (e.Key == Key.X) Input.X = false;
             if (e.Key == Key.Z) Input.Z = false;
             if (e.Key == Key.LeftCtrl) Input.CTRL = false;
+            if (e.Key == Key.LeftShift) Input.SHIFT = false;
             if (e.Key == Key.Delete) Input.DEL = false;
             if (e.Key == Key.Space) Input.SPACE = false;
+
+            if (e.Key == Key.W) Input.UP = false;
+            if (e.Key == Key.S) Input.DOWN = false;
+            if (e.Key == Key.A) Input.LEFT = false;
+            if (e.Key == Key.D) Input.RIGHT = false;
 
             Input.Changed();
         }
@@ -126,13 +198,14 @@ namespace RayTwol
 
             int x = (int)e.GetPosition(viewport).X;
             int y = (int)e.GetPosition(viewport).Y;
-            /*
+            
             if (x < Editor.activeTypeGroup.width * 16 && y < Editor.activeTypeGroup.height * 16)
             {
-                label_mgraphic.Margin = new Thickness(x + 10, y + 18, x + label_mgraphic.ActualWidth, y + label_mgraphic.ActualHeight);
-                Type mouseType = Editor.activeTypeGroup.types[((x / 16) + ((y / 16) * Editor.activeTypeGroup.width))];
-                label_mgraphic.Text = mouseType.graphic.X + ", " + mouseType.graphic.Y + "\n" + mouseType.collision;
-            }*/
+                //label_mgraphic.Margin = new Thickness(x + 10, y + 18, x + label_mgraphic.ActualWidth, y + label_mgraphic.ActualHeight);
+                //Type mouseType = Editor.activeTypeGroup.types[((x / 16) + ((y / 16) * Editor.activeTypeGroup.width))];
+                //label_mgraphic.Text = mouseType.graphic.X + ", " + mouseType.graphic.Y + "\n" + mouseType.collision;
+                //label_mgraphic.Text = string.Format("{0}, {1}", x, y);
+            }
 
             Input.Changed();
         }

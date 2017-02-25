@@ -16,7 +16,7 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -70,12 +70,17 @@
     </Compile>
     <Compile Include="RayTwol\Extract.cs" />
     <Compile Include="RayTwol\LoadSave.cs" />
-    <Compile Include="RayTwol\TypesEdit.cs" />
-    <Compile Include="RayTwol\TypesSelect.cs" />
+    <Compile Include="RayTwol\Selection.cs" />
     <Compile Include="RayTwol\Input.cs" />
     <Compile Include="RayTwol\Objects.cs" />
     <Compile Include="RayTwol\Editor.cs" />
     <Compile Include="RayTwol\Rendering.cs" />
+    <Compile Include="Windows\EditBytes.xaml.cs">
+      <DependentUpon>EditBytes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\EventSelect.xaml.cs">
+      <DependentUpon>EventSelect.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Help.xaml.cs">
       <DependentUpon>Help.xaml</DependentUpon>
     </Compile>
@@ -92,6 +97,14 @@
     <Page Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\EditBytes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\EventSelect.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\Help.xaml">
       <SubType>Designer</SubType>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RayTwol"
         xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero" x:Class="RayTwol.MainWindow"
-        MinHeight="475" MinWidth="770"
+        MinHeight="475" MinWidth="980"
         mc:Ignorable="d"
         Title="RayTwol" Height="800" Width="1280" Background="#FF1B0E17" Closed="MainWindow_Closed" Icon="/editor;component/icont512.ico" Loaded="Window_Loaded">
     <Window.Resources>
@@ -334,7 +334,7 @@
             <ColumnDefinition Width="55*"/>
         </Grid.ColumnDefinitions>
 
-        <ListView x:Name="objectsList" HorizontalAlignment="Left" Margin="12,41,0,90" Width="257" BorderBrush="#FF411E3F" Foreground="#FFFFA200" IsSynchronizedWithCurrentItem="True" Style="{DynamicResource ListViewStyle1}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="objectsList_SelectionChanged">
+        <ListView x:Name="objectsList" HorizontalAlignment="Left" Margin="12,41,0,139" Width="210" BorderBrush="#FF411E3F" Foreground="#FFFFA200" IsSynchronizedWithCurrentItem="True" Style="{DynamicResource ListViewStyle1}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="objectsList_SelectionChanged">
             <ListView.Resources>
                 <Style TargetType="{x:Type GridViewColumnHeader}">
                     <Setter Property="Visibility" Value="Collapsed" />
@@ -352,7 +352,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button x:Name="button_Revert" Content="Revert" HorizontalAlignment="Left" Margin="12,10,0,0" Width="62" BorderBrush="#FF411E3F" Foreground="#FFFF0080" FontSize="16" Height="28" VerticalAlignment="Top" FontWeight="Bold" Click="button_Revert_Click" Focusable="False">
+        <Button x:Name="button_Revert" Content="Revert" HorizontalAlignment="Left" Margin="12,10,0,0" Width="68" BorderBrush="#FF411E3F" Foreground="#FFFF6A4A" FontSize="16" Height="28" VerticalAlignment="Top" FontWeight="Bold" Click="button_Revert_Click" Focusable="False">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="#FF1D0918" Offset="1"/>
@@ -360,7 +360,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button x:Name="button_Fetch" Content="Fetch" HorizontalAlignment="Left" Margin="77,10,0,0" Width="62" BorderBrush="#FF411E3F" Foreground="#FFFF6A4A" FontSize="16" Height="28" VerticalAlignment="Top" FontWeight="Bold" Click="button_Fetch_Click" Focusable="False">
+        <Button x:Name="button_Hold" Content="Backup" HorizontalAlignment="Left" Margin="83,10,0,0" Width="68" BorderBrush="#FF411E3F" Foreground="#FFFFA200" FontSize="16" Height="28" VerticalAlignment="Top" FontWeight="Bold" Click="button_Hold_Click" Focusable="False">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF1D0918" Offset="1"/>
@@ -368,17 +368,9 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button x:Name="button_Hold" Content="Hold" HorizontalAlignment="Left" Margin="142,10,0,0" Width="62" BorderBrush="#FF411E3F" Foreground="#FFFFA200" FontSize="16" Height="28" VerticalAlignment="Top" FontWeight="Bold" Click="button_Hold_Click" Focusable="False">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF1D0918" Offset="1"/>
-                    <GradientStop Color="#FF462844"/>
-                </LinearGradientBrush>
-            </Button.Background>
-        </Button>
-        <Border BorderBrush="#FF411E3F" BorderThickness="1" HorizontalAlignment="Left" Height="75" Margin="12,0,0,10" VerticalAlignment="Bottom" Width="257" Background="#FF23111D">
+        <Border BorderBrush="#FF411E3F" BorderThickness="1" HorizontalAlignment="Left" Height="100" Margin="12,0,0,10" VerticalAlignment="Bottom" Width="210" Background="#FF23111D">
             <Canvas>
-                <TextBox x:Name="textbox_ObjName" HorizontalAlignment="Left" Height="26" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="241" Foreground="#FFCEFF6A" FontSize="14" BorderBrush="#FF411E3F" CaretBrush="#FFCEFF6A" IsEnabled="False" SelectionOpacity="0" Grid.ColumnSpan="2" Canvas.Left="7" Canvas.Top="6">
+                <TextBox x:Name="textbox_ObjName" HorizontalAlignment="Left" Height="26" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="195" Foreground="#FFFFE794" FontSize="14" BorderBrush="#FF411E3F" CaretBrush="#FFFFE794" SelectionOpacity="0" Grid.ColumnSpan="2" Canvas.Top="5" IsEnabled="False" Canvas.Left="7">
                     <TextBox.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="#FF1D0918" Offset="0"/>
@@ -386,7 +378,7 @@
                         </LinearGradientBrush>
                     </TextBox.Background>
                 </TextBox>
-                <TextBox x:Name="textbox_ObjPosX" HorizontalAlignment="Left" Height="26" TextWrapping="Wrap" Text="" VerticalAlignment="Bottom" Width="77" Foreground="#FFCEFF6A" FontSize="16" BorderBrush="#FF5B2C2C" CaretBrush="#FFCEFF6A" IsEnabled="False" Canvas.Left="7" Canvas.Top="38">
+                <TextBox x:Name="textbox_ObjPosX" HorizontalAlignment="Left" Height="26" TextWrapping="Wrap" Text="" VerticalAlignment="Bottom" Width="95" Foreground="#FFFFE794" FontSize="16" BorderBrush="#FF5B2C2C" CaretBrush="#FFFFE794" IsEnabled="False" Canvas.Left="7" Canvas.Top="36" LostFocus="textbox_ObjPosX_LostFocus" TextChanged="textbox_ObjPosX_TextChanged">
                     <TextBox.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="#FF1D1414" Offset="0"/>
@@ -394,7 +386,7 @@
                         </LinearGradientBrush>
                     </TextBox.Background>
                 </TextBox>
-                <TextBox x:Name="textbox_ObjPosY" HorizontalAlignment="Left" Height="26" TextWrapping="Wrap" Text="" VerticalAlignment="Bottom" Width="77" Foreground="#FFCEFF6A" FontSize="16" BorderBrush="#FF1E4123" CaretBrush="#FFCEFF6A" IsEnabled="False" Grid.ColumnSpan="2" Canvas.Left="89" Canvas.Top="38">
+                <TextBox x:Name="textbox_ObjPosY" HorizontalAlignment="Left" Height="26" TextWrapping="Wrap" Text="" VerticalAlignment="Bottom" Width="95" Foreground="#FFFFE794" FontSize="16" BorderBrush="#FF1E4123" CaretBrush="#FFFFE794" IsEnabled="False" Grid.ColumnSpan="2" Canvas.Left="107" Canvas.Top="36" LostFocus="textbox_ObjPosY_LostFocus" TextChanged="textbox_ObjPosY_TextChanged">
                     <TextBox.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="#FF141D15" Offset="0"/>
@@ -402,6 +394,22 @@
                         </LinearGradientBrush>
                     </TextBox.Background>
                 </TextBox>
+                <Button x:Name="button_EditEventType" Content="Change type" HorizontalAlignment="Left" Width="119" BorderBrush="#FF411E3F" Foreground="#FFFFE794" FontSize="16" Height="26" VerticalAlignment="Bottom" FontWeight="Bold" Focusable="False" Canvas.Left="83" Canvas.Top="67" Click="button_EditEventType_click">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                            <GradientStop Color="#FF1D0918" Offset="1"/>
+                            <GradientStop Color="#FF462844"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+                <Button x:Name="button_EditEventBytes1" Content="Bytes" HorizontalAlignment="Left" Width="71" BorderBrush="#FF411E3F" Foreground="#FFFFA200" FontSize="16" Height="26" VerticalAlignment="Bottom" FontWeight="Bold" Click="button_EditEventBytes_click" Focusable="False" Canvas.Left="7" Canvas.Top="67">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                            <GradientStop Color="#FF1D0918" Offset="1"/>
+                            <GradientStop Color="#FF462844"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
             </Canvas>
         </Border>
 
@@ -417,7 +425,7 @@
         </Button>
 
 
-        <Button x:Name="button_Save" Content="Save" HorizontalAlignment="Left" Margin="207,10,0,0" Width="62" BorderBrush="#FF411E3F" Foreground="#FFFFE794" FontSize="16" Height="28" VerticalAlignment="Top" FontWeight="Bold" Click="button_Save_click" Focusable="False">
+        <Button x:Name="button_Save" Content="Save" HorizontalAlignment="Left" Margin="154,10,0,0" Width="68" BorderBrush="#FF411E3F" Foreground="#FFFFE794" FontSize="16" Height="28" VerticalAlignment="Top" FontWeight="Bold" Click="button_Save_click" Focusable="False">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF1D0918" Offset="1"/>
@@ -425,7 +433,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="273,41,5,41">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="226,41,5,41">
             <StackPanel Background="#FF0E070B">
                 <Canvas x:Name="viewport_canvas" Panel.ZIndex="2" IsHitTestVisible="False">
                     <TextBlock x:Name="label_mgraphic" TextWrapping="Wrap" Background="#BF000000" Foreground="White" FontSize="16" Padding="5" IsHitTestVisible="False"/>
@@ -433,7 +441,7 @@
                 <Image x:Name="viewport" HorizontalAlignment="Left" MouseDown="viewport_MouseDown" MouseMove="viewport_MouseMove" Panel.ZIndex="0" MouseUp="viewport_MouseUp"/>
             </StackPanel>
         </ScrollViewer>
-        <Button x:Name="button_grid" Content="Grid" HorizontalAlignment="Left" Margin="273,0,0,10" Width="62" BorderBrush="#FF411E3F" Foreground="#FFFFA200" FontSize="16" FontWeight="Bold" Click="button_grid_click" Height="26" VerticalAlignment="Bottom" Focusable="False">
+        <Button x:Name="button_grid" Content="Grid" HorizontalAlignment="Left" Margin="567,10,0,0" Width="62" BorderBrush="#FF411E3F" Foreground="#FFFFA200" FontSize="16" FontWeight="Bold" Click="button_grid_click" Focusable="False" Height="28" VerticalAlignment="Top">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF1D0918" Offset="1"/>
@@ -441,7 +449,259 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button x:Name="button_collision" Content="Collision" HorizontalAlignment="Left" Margin="341,0,0,10" Width="72" BorderBrush="#FF411E3F" Foreground="#FFFFA200" FontSize="16" FontWeight="Bold" Click="button_collision_click" Height="26" VerticalAlignment="Bottom" Focusable="False">
+        <Canvas Margin="226,0,0,10" Height="26" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="771">
+            <Button x:Name="button_type_solid" HorizontalAlignment="Left" Margin="0,0,0,10" Width="26" BorderBrush="#FF411E3F" FontSize="16" FontWeight="Bold" Click="button_type_solid_Click" Height="26" VerticalAlignment="Bottom" Foreground="{x:Null}" Focusable="False">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF1D0918" Offset="1"/>
+                        <GradientStop Color="#FF462844"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+                <StackPanel>
+                    <Image Source="/editor;component/gfx/types/type_solid.png" />
+                </StackPanel>
+            </Button>
+            <Button x:Name="button_type_passthrough" HorizontalAlignment="Left" Margin="30,0,0,10" Width="26" BorderBrush="#FF411E3F" FontSize="16" FontWeight="Bold" Click="button_type_passthrough_Click" Height="26" VerticalAlignment="Bottom" Foreground="{x:Null}" Focusable="False">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF1D0918" Offset="1"/>
+                        <GradientStop Color="#FF462844"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+                <StackPanel>
+                    <Image Source="/editor;component/gfx/types/type_passthrough.png" />
+                </StackPanel>
+            </Button>
+            <Button x:Name="type_hill_steep_left" Focusable="False" HorizontalAlignment="Left" Margin="60,0,0,10" Width="26" BorderBrush="#FF411E3F" FontSize="16" FontWeight="Bold" Click="button_type_hill_steep_left_Click" Height="26" VerticalAlignment="Bottom" Foreground="{x:Null}">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF1D0918" Offset="1"/>
+                        <GradientStop Color="#FF462844"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+                <StackPanel>
+                    <Image Source="/editor;component/gfx/types/type_hill_steep_left.png" />
+                </StackPanel>
+            </Button>
+            <Button x:Name="type_hill_steep_right" Focusable="False" HorizontalAlignment="Left" Margin="90,0,0,10" Width="26" BorderBrush="#FF411E3F" FontSize="16" FontWeight="Bold" Click="button_type_hill_steep_right_Click" Height="26" VerticalAlignment="Bottom" Foreground="{x:Null}">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF1D0918" Offset="1"/>
+                        <GradientStop Color="#FF462844"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+                <StackPanel>
+                    <Image Source="/editor;component/gfx/types/type_hill_steep_right.png" />
+                </StackPanel>
+            </Button>
+            <Button x:Name="type_hill_slight_left_1" Focusable="False" HorizontalAlignment="Left" Width="26" BorderBrush="#FF411E3F" FontSize="16" FontWeight="Bold" Click="button_type_hill_slight_left_1_Click" Height="26" VerticalAlignment="Bottom" Foreground="{x:Null}" Canvas.Left="120">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF1D0918" Offset="1"/>
+                        <GradientStop Color="#FF462844"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+                <StackPanel>
+                    <Image Source="/editor;component/gfx/types/type_hill_slight_left_1.png" />
+                </StackPanel>
+            </Button>
+            <Button x:Name="type_hill_slight_left_2" Focusable="False" HorizontalAlignment="Left" Margin="150,0,0,10" Width="26" BorderBrush="#FF411E3F" FontSize="16" FontWeight="Bold" Click="button_type_hill_slight_left_2_Click" Height="26" VerticalAlignment="Bottom" Foreground="{x:Null}">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF1D0918" Offset="1"/>
+                        <GradientStop Color="#FF462844"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+                <StackPanel>
+                    <Image Source="/editor;component/gfx/types/type_hill_slight_left_2.png" />
+                </StackPanel>
+            </Button>
+            <Button x:Name="type_hill_slight_right_2" Focusable="False" HorizontalAlignment="Left" Margin="180,0,0,10" Width="26" BorderBrush="#FF411E3F" FontSize="16" FontWeight="Bold" Click="button_type_hill_slight_right_2_Click" Height="26" VerticalAlignment="Bottom" Foreground="{x:Null}">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF1D0918" Offset="1"/>
+                        <GradientStop Color="#FF462844"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+                <StackPanel>
+                    <Image Source="/editor;component/gfx/types/type_hill_slight_right_2.png" />
+                </StackPanel>
+            </Button>
+            <Button x:Name="type_hill_slight_right_1" Focusable="False" HorizontalAlignment="Left" Margin="210,0,0,10" Width="26" BorderBrush="#FF411E3F" FontSize="16" FontWeight="Bold" Click="button_type_hill_slight_right_1_Click" Height="26" VerticalAlignment="Bottom" Foreground="{x:Null}">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF1D0918" Offset="1"/>
+                        <GradientStop Color="#FF462844"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+                <StackPanel>
+                    <Image Source="/editor;component/gfx/types/type_hill_slight_right_1.png" />
+                </StackPanel>
+            </Button>
+            <Button x:Name="type_slippery" Focusable="False" HorizontalAlignment="Left" Margin="240,0,0,10" Width="26" BorderBrush="#FF411E3F" FontSize="16" FontWeight="Bold" Click="button_type_slippery_Click" Height="26" VerticalAlignment="Bottom" Foreground="{x:Null}">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF1D0918" Offset="1"/>
+                        <GradientStop Color="#FF462844"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+                <StackPanel>
+                    <Image Source="/editor;component/gfx/types/type_slippery.png" />
+                </StackPanel>
+            </Button>
+            <Button x:Name="type_slippery_steep_left" Focusable="False" HorizontalAlignment="Left" Margin="270,0,0,10" Width="26" BorderBrush="#FF411E3F" FontSize="16" FontWeight="Bold" Click="button_type_slippery_steep_left_Click" Height="26" VerticalAlignment="Bottom" Foreground="{x:Null}">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF1D0918" Offset="1"/>
+                        <GradientStop Color="#FF462844"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+                <StackPanel>
+                    <Image Source="/editor;component/gfx/types/type_slippery_steep_left.png" />
+                </StackPanel>
+            </Button>
+            <Button x:Name="type_slippery_steep_right" Focusable="False" HorizontalAlignment="Left" Margin="300,0,0,10" Width="26" BorderBrush="#FF411E3F" FontSize="16" FontWeight="Bold" Click="button_type_slippery_steep_right_Click" Height="26" VerticalAlignment="Bottom" Foreground="{x:Null}">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF1D0918" Offset="1"/>
+                        <GradientStop Color="#FF462844"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+                <StackPanel>
+                    <Image Source="/editor;component/gfx/types/type_slippery_steep_right.png" />
+                </StackPanel>
+            </Button>
+            <Button x:Name="type_slippery_slight_left_1" Focusable="False" HorizontalAlignment="Left" Margin="330,0,0,10" Width="26" BorderBrush="#FF411E3F" FontSize="16" FontWeight="Bold" Click="button_type_slippery_slight_left_1_Click" Height="26" VerticalAlignment="Bottom" Foreground="{x:Null}">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF1D0918" Offset="1"/>
+                        <GradientStop Color="#FF462844"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+                <StackPanel>
+                    <Image Source="/editor;component/gfx/types/type_slippery_slight_left_1.png" />
+                </StackPanel>
+            </Button>
+            <Button x:Name="type_slippery_slight_left_2" Focusable="False" HorizontalAlignment="Left" Margin="360,0,0,10" Width="26" BorderBrush="#FF411E3F" FontSize="16" FontWeight="Bold" Click="button_type_slippery_slight_left_2_Click" Height="26" VerticalAlignment="Bottom" Foreground="{x:Null}">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF1D0918" Offset="1"/>
+                        <GradientStop Color="#FF462844"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+                <StackPanel>
+                    <Image Source="/editor;component/gfx/types/type_slippery_slight_left_2.png" />
+                </StackPanel>
+            </Button>
+            <Button x:Name="type_slippery_slight_right_2" Focusable="False" HorizontalAlignment="Left" Margin="390,0,0,10" Width="26" BorderBrush="#FF411E3F" FontSize="16" FontWeight="Bold" Click="button_type_slippery_slight_right_2_Click" Height="26" VerticalAlignment="Bottom" Foreground="{x:Null}">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF1D0918" Offset="1"/>
+                        <GradientStop Color="#FF462844"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+                <StackPanel>
+                    <Image Source="/editor;component/gfx/types/type_slippery_slight_right_2.png" />
+                </StackPanel>
+            </Button>
+            <Button x:Name="type_slippery_slight_right_1" Focusable="False" HorizontalAlignment="Left" Margin="420,0,0,10" Width="26" BorderBrush="#FF411E3F" FontSize="16" FontWeight="Bold" Click="button_type_slippery_slight_right_1_Click" Height="26" VerticalAlignment="Bottom" Foreground="{x:Null}">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF1D0918" Offset="1"/>
+                        <GradientStop Color="#FF462844"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+                <StackPanel>
+                    <Image Source="/editor;component/gfx/types/type_slippery_slight_right_1.png" />
+                </StackPanel>
+            </Button>
+            <Button x:Name="type_bounce" Focusable="False" HorizontalAlignment="Left" Margin="450,0,0,10" Width="26" BorderBrush="#FF411E3F" FontSize="16" FontWeight="Bold" Click="button_type_bounce_Click" Height="26" VerticalAlignment="Bottom" Foreground="{x:Null}">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF1D0918" Offset="1"/>
+                        <GradientStop Color="#FF462844"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+                <StackPanel>
+                    <Image Source="/editor;component/gfx/types/type_bounce.png" />
+                </StackPanel>
+            </Button>
+            <Button x:Name="type_climb" Focusable="False" HorizontalAlignment="Left" Margin="480,0,0,10" Width="26" BorderBrush="#FF411E3F" FontSize="16" FontWeight="Bold" Click="button_type_climb_Click" Height="26" VerticalAlignment="Bottom" Foreground="{x:Null}">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF1D0918" Offset="1"/>
+                        <GradientStop Color="#FF462844"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+                <StackPanel>
+                    <Image Source="/editor;component/gfx/types/type_climb.png" />
+                </StackPanel>
+            </Button>
+            <Button x:Name="type_damage" Focusable="False" HorizontalAlignment="Left" Margin="510,0,0,10" Width="26" BorderBrush="#FF411E3F" FontSize="16" FontWeight="Bold" Click="button_type_damage_Click" Height="26" VerticalAlignment="Bottom" Foreground="{x:Null}">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF1D0918" Offset="1"/>
+                        <GradientStop Color="#FF462844"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+                <StackPanel>
+                    <Image Source="/editor;component/gfx/types/type_damage.png" />
+                </StackPanel>
+            </Button>
+            <Button x:Name="type_spikes" Focusable="False" HorizontalAlignment="Left" Margin="540,0,0,10" Width="26" BorderBrush="#FF411E3F" FontSize="16" FontWeight="Bold" Click="button_type_spikes_Click" Height="26" VerticalAlignment="Bottom" Foreground="{x:Null}">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF1D0918" Offset="1"/>
+                        <GradientStop Color="#FF462844"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+                <StackPanel>
+                    <Image Source="/editor;component/gfx/types/type_spikes.png" />
+                </StackPanel>
+            </Button>
+            <Button x:Name="type_water" Focusable="False" HorizontalAlignment="Left" Margin="570,0,0,10" Width="26" BorderBrush="#FF411E3F" FontSize="16" FontWeight="Bold" Click="button_type_water_Click" Height="26" VerticalAlignment="Bottom" Foreground="{x:Null}">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF1D0918" Offset="1"/>
+                        <GradientStop Color="#FF462844"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+                <StackPanel>
+                    <Image Source="/editor;component/gfx/types/type_water.png" />
+                </StackPanel>
+            </Button>
+            <Button x:Name="type_cliff" Focusable="False" HorizontalAlignment="Left" Margin="600,0,0,10" Width="26" BorderBrush="#FF411E3F" FontSize="16" FontWeight="Bold" Click="button_type_cliff_Click" Height="26" VerticalAlignment="Bottom" Foreground="{x:Null}">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF1D0918" Offset="1"/>
+                        <GradientStop Color="#FF462844"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+                <StackPanel>
+                    <Image Source="/editor;component/gfx/types/type_cliff.png" />
+                </StackPanel>
+            </Button>
+            <Button x:Name="type_event" Focusable="False" HorizontalAlignment="Left" Margin="630,0,0,10" Width="26" BorderBrush="#FF411E3F" FontSize="16" FontWeight="Bold" Click="button_type_event_Click" Height="26" VerticalAlignment="Bottom" Foreground="{x:Null}">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF1D0918" Offset="1"/>
+                        <GradientStop Color="#FF462844"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+                <StackPanel>
+                    <Image Source="/editor;component/gfx/types/type_event.png" />
+                </StackPanel>
+            </Button>
+            <Button x:Name="button_replace" Focusable="False" Content="Replace" HorizontalAlignment="Left" Width="78" BorderBrush="#FF411E3F" Foreground="#FFFFA200" FontSize="16" FontWeight="Bold" Click="button_replace_click" Height="26" VerticalAlignment="Bottom" Canvas.Left="666">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF1D0918" Offset="1"/>
+                        <GradientStop Color="#FF462844"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+        </Canvas>
+        <Button x:Name="button_openlevel" Content="Open Level" HorizontalAlignment="Left" Margin="226,10,0,0" Width="102" BorderBrush="#FF411E3F" Foreground="#FFFFA200" FontSize="16" Height="28" VerticalAlignment="Top" FontWeight="Bold" Click="button_openlevel_click" Focusable="False">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF1D0918" Offset="1"/>
@@ -449,261 +709,36 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button x:Name="button_type_solid" HorizontalAlignment="Left" Margin="419,0,0,10" Width="26" BorderBrush="#FF411E3F" FontSize="16" FontWeight="Bold" Click="button_type_solid_Click" Height="26" VerticalAlignment="Bottom" Foreground="{x:Null}" Focusable="False">
-            <Button.Background>
+        <ToggleButton x:Name="togglebutton_events" Content="Events" HorizontalAlignment="Left" Margin="333,10,0,0" Width="75" BorderBrush="#FF3A0917" Foreground="#FF9590FF" FontSize="16" Height="28" VerticalAlignment="Top" FontWeight="Bold" Click="togglebutton_events_Click" IsChecked="True">
+            <ToggleButton.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF1D0918" Offset="1"/>
-                    <GradientStop Color="#FF462844"/>
+                    <GradientStop Color="#FF1F000F" Offset="1"/>
+                    <GradientStop Color="#FF5D0037"/>
                 </LinearGradientBrush>
-            </Button.Background>
-            <StackPanel>
-                <Image Source="/editor;component/gfx/types/type_solid.png" />
-            </StackPanel>
-        </Button>
-        <Button x:Name="button_type_passthrough" HorizontalAlignment="Left" Margin="448,0,0,10" Width="26" BorderBrush="#FF411E3F" FontSize="16" FontWeight="Bold" Click="button_type_passthrough_Click" Height="26" VerticalAlignment="Bottom" Foreground="{x:Null}" Focusable="False">
-            <Button.Background>
+            </ToggleButton.Background>
+
+        </ToggleButton>
+        <ToggleButton x:Name="togglebutton_graphics" Content="Graphics" HorizontalAlignment="Left" Margin="410,10,0,0" Width="75" BorderBrush="#FF3A0917" Foreground="#FF04B624" FontSize="16" Height="28" VerticalAlignment="Top" FontWeight="Bold" Click="togglebutton_graphics_Click">
+            <ToggleButton.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF1D0918" Offset="1"/>
-                    <GradientStop Color="#FF462844"/>
+                    <GradientStop Color="#FF1F000F" Offset="1"/>
+                    <GradientStop Color="#FF5D0037"/>
                 </LinearGradientBrush>
-            </Button.Background>
-            <StackPanel>
-                <Image Source="/editor;component/gfx/types/type_passthrough.png" />
-            </StackPanel>
-        </Button>
-        <Button x:Name="type_hill_steep_left" Focusable="False" HorizontalAlignment="Left" Margin="477,0,0,10" Width="26" BorderBrush="#FF411E3F" FontSize="16" FontWeight="Bold" Click="button_type_hill_steep_left_Click" Height="26" VerticalAlignment="Bottom" Foreground="{x:Null}">
-            <Button.Background>
+            </ToggleButton.Background>
+
+        </ToggleButton>
+        <ToggleButton x:Name="togglebutton_collision" Content="Collision" HorizontalAlignment="Left" Margin="487,10,0,0" Width="75" BorderBrush="#FF3A0917" Foreground="#FFFF4A4A" FontSize="16" Height="28" VerticalAlignment="Top" FontWeight="Bold" Click="togglebutton_collision_Click">
+            <ToggleButton.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF1D0918" Offset="1"/>
-                    <GradientStop Color="#FF462844"/>
+                    <GradientStop Color="#FF1F000F" Offset="1"/>
+                    <GradientStop Color="#FF5D0037"/>
                 </LinearGradientBrush>
-            </Button.Background>
-            <StackPanel>
-                <Image Source="/editor;component/gfx/types/type_hill_steep_left.png" />
-            </StackPanel>
-        </Button>
-        <Button x:Name="type_hill_steep_right" Focusable="False" HorizontalAlignment="Left" Margin="506,0,0,10" Width="26" BorderBrush="#FF411E3F" FontSize="16" FontWeight="Bold" Click="button_type_hill_steep_right_Click" Height="26" VerticalAlignment="Bottom" Foreground="{x:Null}">
+            </ToggleButton.Background>
+
+        </ToggleButton>
+        <Button x:Name="button_AddEvent" Content="Add Event" HorizontalAlignment="Left" Width="210" BorderBrush="#FF411E3F" Foreground="#FFFF0080" FontSize="16" Height="26" VerticalAlignment="Bottom" FontWeight="Bold" Click="button_AddEvent_Click" Focusable="False" Margin="12,0,0,115">
             <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF1D0918" Offset="1"/>
-                    <GradientStop Color="#FF462844"/>
-                </LinearGradientBrush>
-            </Button.Background>
-            <StackPanel>
-                <Image Source="/editor;component/gfx/types/type_hill_steep_right.png" />
-            </StackPanel>
-        </Button>
-        <Button x:Name="type_hill_slight_left_1" Focusable="False" HorizontalAlignment="Left" Margin="535,0,0,10" Width="26" BorderBrush="#FF411E3F" FontSize="16" FontWeight="Bold" Click="button_type_hill_slight_left_1_Click" Height="26" VerticalAlignment="Bottom" Foreground="{x:Null}">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF1D0918" Offset="1"/>
-                    <GradientStop Color="#FF462844"/>
-                </LinearGradientBrush>
-            </Button.Background>
-            <StackPanel>
-                <Image Source="/editor;component/gfx/types/type_hill_slight_left_1.png" />
-            </StackPanel>
-        </Button>
-        <Button x:Name="type_hill_slight_left_2" Focusable="False" HorizontalAlignment="Left" Margin="564,0,0,10" Width="26" BorderBrush="#FF411E3F" FontSize="16" FontWeight="Bold" Click="button_type_hill_slight_left_2_Click" Height="26" VerticalAlignment="Bottom" Foreground="{x:Null}">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF1D0918" Offset="1"/>
-                    <GradientStop Color="#FF462844"/>
-                </LinearGradientBrush>
-            </Button.Background>
-            <StackPanel>
-                <Image Source="/editor;component/gfx/types/type_hill_slight_left_2.png" />
-            </StackPanel>
-        </Button>
-        <Button x:Name="type_hill_slight_right_2" Focusable="False" HorizontalAlignment="Left" Margin="593,0,0,10" Width="26" BorderBrush="#FF411E3F" FontSize="16" FontWeight="Bold" Click="button_type_hill_slight_right_2_Click" Height="26" VerticalAlignment="Bottom" Foreground="{x:Null}">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF1D0918" Offset="1"/>
-                    <GradientStop Color="#FF462844"/>
-                </LinearGradientBrush>
-            </Button.Background>
-            <StackPanel>
-                <Image Source="/editor;component/gfx/types/type_hill_slight_right_2.png" />
-            </StackPanel>
-        </Button>
-        <Button x:Name="type_slippery" Focusable="False" HorizontalAlignment="Left" Margin="651,0,0,10" Width="26" BorderBrush="#FF411E3F" FontSize="16" FontWeight="Bold" Click="button_type_slippery_Click" Height="26" VerticalAlignment="Bottom" Foreground="{x:Null}">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF1D0918" Offset="1"/>
-                    <GradientStop Color="#FF462844"/>
-                </LinearGradientBrush>
-            </Button.Background>
-            <StackPanel>
-                <Image Source="/editor;component/gfx/types/type_slippery.png" />
-            </StackPanel>
-        </Button>
-        <Button x:Name="type_slippery_steep_left" Focusable="False" HorizontalAlignment="Left" Margin="680,0,0,10" Width="26" BorderBrush="#FF411E3F" FontSize="16" FontWeight="Bold" Click="button_type_slippery_steep_left_Click" Height="26" VerticalAlignment="Bottom" Foreground="{x:Null}">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF1D0918" Offset="1"/>
-                    <GradientStop Color="#FF462844"/>
-                </LinearGradientBrush>
-            </Button.Background>
-            <StackPanel>
-                <Image Source="/editor;component/gfx/types/type_slippery_steep_left.png" />
-            </StackPanel>
-        </Button>
-        <Button x:Name="type_slippery_steep_right" Focusable="False" HorizontalAlignment="Left" Margin="709,0,0,10" Width="26" BorderBrush="#FF411E3F" FontSize="16" FontWeight="Bold" Click="button_type_slippery_steep_right_Click" Height="26" VerticalAlignment="Bottom" Foreground="{x:Null}">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF1D0918" Offset="1"/>
-                    <GradientStop Color="#FF462844"/>
-                </LinearGradientBrush>
-            </Button.Background>
-            <StackPanel>
-                <Image Source="/editor;component/gfx/types/type_slippery_steep_right.png" />
-            </StackPanel>
-        </Button>
-        <Button x:Name="type_slippery_slight_left_1" Focusable="False" HorizontalAlignment="Left" Margin="738,0,0,10" Width="26" BorderBrush="#FF411E3F" FontSize="16" FontWeight="Bold" Click="button_type_slippery_slight_left_1_Click" Height="26" VerticalAlignment="Bottom" Foreground="{x:Null}">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF1D0918" Offset="1"/>
-                    <GradientStop Color="#FF462844"/>
-                </LinearGradientBrush>
-            </Button.Background>
-            <StackPanel>
-                <Image Source="/editor;component/gfx/types/type_slippery_slight_left_1.png" />
-            </StackPanel>
-        </Button>
-        <Button x:Name="type_slippery_slight_left_2" Focusable="False" HorizontalAlignment="Left" Margin="767,0,0,10" Width="26" BorderBrush="#FF411E3F" FontSize="16" FontWeight="Bold" Click="button_type_slippery_slight_left_2_Click" Height="26" VerticalAlignment="Bottom" Foreground="{x:Null}">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF1D0918" Offset="1"/>
-                    <GradientStop Color="#FF462844"/>
-                </LinearGradientBrush>
-            </Button.Background>
-            <StackPanel>
-                <Image Source="/editor;component/gfx/types/type_slippery_slight_left_2.png" />
-            </StackPanel>
-        </Button>
-        <Button x:Name="type_slippery_slight_right_2" Focusable="False" HorizontalAlignment="Left" Margin="796,0,0,10" Width="26" BorderBrush="#FF411E3F" FontSize="16" FontWeight="Bold" Click="button_type_slippery_slight_right_2_Click" Height="26" VerticalAlignment="Bottom" Foreground="{x:Null}">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF1D0918" Offset="1"/>
-                    <GradientStop Color="#FF462844"/>
-                </LinearGradientBrush>
-            </Button.Background>
-            <StackPanel>
-                <Image Source="/editor;component/gfx/types/type_slippery_slight_right_2.png" />
-            </StackPanel>
-        </Button>
-        <Button x:Name="type_slippery_slight_right_1" Focusable="False" HorizontalAlignment="Left" Margin="825,0,0,10" Width="26" BorderBrush="#FF411E3F" FontSize="16" FontWeight="Bold" Click="button_type_slippery_slight_right_1_Click" Height="26" VerticalAlignment="Bottom" Foreground="{x:Null}">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF1D0918" Offset="1"/>
-                    <GradientStop Color="#FF462844"/>
-                </LinearGradientBrush>
-            </Button.Background>
-            <StackPanel>
-                <Image Source="/editor;component/gfx/types/type_slippery_slight_right_1.png" />
-            </StackPanel>
-        </Button>
-        <Button x:Name="type_bounce" Focusable="False" HorizontalAlignment="Left" Margin="854,0,0,10" Width="26" BorderBrush="#FF411E3F" FontSize="16" FontWeight="Bold" Click="button_type_bounce_Click" Height="26" VerticalAlignment="Bottom" Foreground="{x:Null}">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF1D0918" Offset="1"/>
-                    <GradientStop Color="#FF462844"/>
-                </LinearGradientBrush>
-            </Button.Background>
-            <StackPanel>
-                <Image Source="/editor;component/gfx/types/type_bounce.png" />
-            </StackPanel>
-        </Button>
-        <Button x:Name="type_climb" Focusable="False" HorizontalAlignment="Left" Margin="883,0,0,10" Width="26" BorderBrush="#FF411E3F" FontSize="16" FontWeight="Bold" Click="button_type_climb_Click" Height="26" VerticalAlignment="Bottom" Foreground="{x:Null}">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF1D0918" Offset="1"/>
-                    <GradientStop Color="#FF462844"/>
-                </LinearGradientBrush>
-            </Button.Background>
-            <StackPanel>
-                <Image Source="/editor;component/gfx/types/type_climb.png" />
-            </StackPanel>
-        </Button>
-        <Button x:Name="type_damage" Focusable="False" HorizontalAlignment="Left" Margin="912,0,0,10" Width="26" BorderBrush="#FF411E3F" FontSize="16" FontWeight="Bold" Click="button_type_damage_Click" Height="26" VerticalAlignment="Bottom" Foreground="{x:Null}">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF1D0918" Offset="1"/>
-                    <GradientStop Color="#FF462844"/>
-                </LinearGradientBrush>
-            </Button.Background>
-            <StackPanel>
-                <Image Source="/editor;component/gfx/types/type_damage.png" />
-            </StackPanel>
-        </Button>
-        <Button x:Name="type_spikes" Focusable="False" HorizontalAlignment="Left" Margin="941,0,0,10" Width="26" BorderBrush="#FF411E3F" FontSize="16" FontWeight="Bold" Click="button_type_spikes_Click" Height="26" VerticalAlignment="Bottom" Foreground="{x:Null}">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF1D0918" Offset="1"/>
-                    <GradientStop Color="#FF462844"/>
-                </LinearGradientBrush>
-            </Button.Background>
-            <StackPanel>
-                <Image Source="/editor;component/gfx/types/type_spikes.png" />
-            </StackPanel>
-        </Button>
-        <Button x:Name="type_water" Focusable="False" HorizontalAlignment="Left" Margin="970,0,0,10" Width="26" BorderBrush="#FF411E3F" FontSize="16" FontWeight="Bold" Click="button_type_water_Click" Height="26" VerticalAlignment="Bottom" Foreground="{x:Null}">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF1D0918" Offset="1"/>
-                    <GradientStop Color="#FF462844"/>
-                </LinearGradientBrush>
-            </Button.Background>
-            <StackPanel>
-                <Image Source="/editor;component/gfx/types/type_water.png" />
-            </StackPanel>
-        </Button>
-        <Button x:Name="type_cliff" Focusable="False" HorizontalAlignment="Left" Margin="1000,0,0,10" Width="26" BorderBrush="#FF411E3F" FontSize="16" FontWeight="Bold" Click="button_type_cliff_Click" Height="26" VerticalAlignment="Bottom" Foreground="{x:Null}">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF1D0918" Offset="1"/>
-                    <GradientStop Color="#FF462844"/>
-                </LinearGradientBrush>
-            </Button.Background>
-            <StackPanel>
-                <Image Source="/editor;component/gfx/types/type_cliff.png" />
-            </StackPanel>
-        </Button>
-        <Button x:Name="type_event" Focusable="False" HorizontalAlignment="Left" Margin="1029,0,0,10" Width="26" BorderBrush="#FF411E3F" FontSize="16" FontWeight="Bold" Click="button_type_event_Click" Height="26" VerticalAlignment="Bottom" Foreground="{x:Null}">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF1D0918" Offset="1"/>
-                    <GradientStop Color="#FF462844"/>
-                </LinearGradientBrush>
-            </Button.Background>
-            <StackPanel>
-                <Image Source="/editor;component/gfx/types/type_event.png" />
-            </StackPanel>
-        </Button>
-        <Button x:Name="type_hill_slight_right_1" Focusable="False" HorizontalAlignment="Left" Margin="622,0,0,10" Width="26" BorderBrush="#FF411E3F" FontSize="16" FontWeight="Bold" Click="button_type_hill_slight_right_1_Click" Height="26" VerticalAlignment="Bottom" Foreground="{x:Null}">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF1D0918" Offset="1"/>
-                    <GradientStop Color="#FF462844"/>
-                </LinearGradientBrush>
-            </Button.Background>
-            <StackPanel>
-                <Image Source="/editor;component/gfx/types/type_hill_slight_right_1.png" />
-            </StackPanel>
-        </Button>
-        <Button x:Name="button_replace" Focusable="False" Content="Replace" HorizontalAlignment="Left" Margin="1061,0,0,10" Width="78" BorderBrush="#FF411E3F" Foreground="#FFFFA200" FontSize="16" FontWeight="Bold" Click="button_replace_click" Height="26" VerticalAlignment="Bottom">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF1D0918" Offset="1"/>
-                    <GradientStop Color="#FF462844"/>
-                </LinearGradientBrush>
-            </Button.Background>
-        </Button>
-        <Label x:Name="label_mapsize" Content="" HorizontalAlignment="Left" Margin="458,7,0,0" VerticalAlignment="Top" Height="28" Foreground="#FFFFA200" FontSize="16" Width="102" FontWeight="Bold"/>
-        <Label x:Name="label_mapname" Content="" HorizontalAlignment="Left" Margin="390,7,0,0" VerticalAlignment="Top" Height="28" Foreground="#FFFF6A4A" FontSize="16" Width="68" FontWeight="Bold"/>
-        <Button x:Name="button_openlevel" Content="Open Level" HorizontalAlignment="Left" Margin="273,10,0,0" Width="102" BorderBrush="#FF411E3F" Foreground="#FFFFA200" FontSize="16" Height="28" VerticalAlignment="Top" FontWeight="Bold" Click="button_openlevel_click" Focusable="False">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="#FF1D0918" Offset="1"/>
                     <GradientStop Color="#FF462844"/>
                 </LinearGradientBrush>

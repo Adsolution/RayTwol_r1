@@ -29,7 +29,10 @@ namespace RayTwol
         {
             if (selectingLeft || selectingRight)
             {
-                selRange = new System.Drawing.Point(((mouse.X + 8) / 16) * 16, ((mouse.Y + 8) / 16) * 16);
+                if (editMode != EditMode.Events)
+                    selRange = Func.GridSnap(mouse);
+                else
+                    selRange = mouse;
 
                 if (selRange.X < selOrigin.X)
                 {
@@ -64,6 +67,9 @@ namespace RayTwol
             SelectingStandards();
             switch (editMode)
             {
+                case EditMode.Events:
+                    selSquare.Stroke = brush_select;
+                    break;
                 case EditMode.Graphics:
                     selSquare.Stroke = brush_select;
                     break;
@@ -87,13 +93,15 @@ namespace RayTwol
             }
 
             if (editMode == EditMode.Graphics)
-                Types_SetFromClipboardTemp(sel1.X / 16, sel1.Y / 16, sel2.X / 16, sel2.Y / 16);
+                Type.SetFromClipboardTemp(sel1.X / 16, sel1.Y / 16, sel2.X / 16, sel2.Y / 16);
         }
 
         public static void SetSelectionOrigin()
         {
-            selOrigin.X = ((mouse.X + 8) / 16) * 16;
-            selOrigin.Y = ((mouse.Y + 8) / 16) * 16;
+            if (editMode != EditMode.Events)
+                selOrigin = Func.GridSnap(mouse);
+            else
+                selOrigin = mouse;
         }
 
         public static void SelectionEndLeft()
@@ -103,8 +111,13 @@ namespace RayTwol
 
             switch (editMode)
             {
+                case (EditMode.Events):
+                    Event.Select(sel1.X, sel1.Y, sel2.X, sel2.Y);
+                    selSquare.Stroke = brush_hidden;
+                    break;
+
                 case EditMode.Collision:
-                    Types_SetCollision(selectedType, sel1.X / 16, sel1.Y / 16, sel2.X / 16, sel2.Y / 16);
+                    Type.SetCollision(selectedType, sel1.X / 16, sel1.Y / 16, sel2.X / 16, sel2.Y / 16);
                     selSquare.Stroke = brush_hidden;
                     break;
 
@@ -122,11 +135,11 @@ namespace RayTwol
             switch (editMode)
             {
                 case EditMode.Collision:
-                    Types_SetCollision(Collisions.none, sel1.X / 16, sel1.Y / 16, sel2.X / 16, sel2.Y / 16);
+                    Type.SetCollision(Collisions.none, sel1.X / 16, sel1.Y / 16, sel2.X / 16, sel2.Y / 16);
                     break;
 
                 case EditMode.Graphics:
-                    Types_SetFromClipboard(sel1.X / 16, sel1.Y / 16, sel2.X / 16, sel2.Y / 16);
+                    Type.SetFromClipboard(sel1.X / 16, sel1.Y / 16, sel2.X / 16, sel2.Y / 16);
                     break;
             }
             selSquare.Stroke = brush_hidden;

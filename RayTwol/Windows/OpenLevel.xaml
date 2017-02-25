@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:RayTwol"
         xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero" x:Class="RayTwol.OpenLevel"
         mc:Ignorable="d"
-        Title="OpenLevel" Height="230" Width="450" Background="#FF1B0E17" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="Open Level" Height="230" Width="450" Background="#FF1B0E17" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Icon="/editor;component/icont512.ico">
     <Window.Resources>
         <SolidColorBrush x:Key="ListBorder" Color="#828790"/>
         <Style x:Key="ListViewStyle1" TargetType="{x:Type ListView}">

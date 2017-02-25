@@ -245,20 +245,5 @@ namespace RayTwol
             else
                 Editor.gridEnabled = true;*/
         }
-
-        private void button_collision_click(object sender, RoutedEventArgs e)
-        {
-            switch (Editor.editMode)
-            {
-                case EditMode.Graphics:
-                    Editor.editMode = EditMode.Collision;
-                    break;
-                case EditMode.Collision:
-                    Editor.editMode = EditMode.Graphics;
-                    break;
-            }
-
-            Refresh(true);
-        }
     }
 }

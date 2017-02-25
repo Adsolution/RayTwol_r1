@@ -53,6 +53,47 @@ namespace RayTwol
 
     public partial class MainWindow
     {
+        public void RefreshEvents()
+        {
+            viewport_canvas.Children.Clear();
+            viewport_canvas.Children.Add(Editor.selSquare);
+            viewport_canvas.Children.Add(label_mgraphic);
+            foreach (Event e in Editor.activeTypeGroup.events)
+            {
+                if (e.inLevel)
+                {
+                    var ev = new System.Windows.Shapes.Ellipse();
+                    int size = 9;
+                    ev.Width = size;
+                    ev.Height = size;
+                    ev.Margin = new Thickness(e.position.X - 4, e.position.Y - 4, 0, 0);
+
+                    if (!e.selected)
+                        ev.Stroke = new SolidColorBrush(System.Windows.Media.Color.FromArgb(255, 255, 231, 148));
+                    else
+                        ev.Stroke = new SolidColorBrush(System.Windows.Media.Color.FromArgb(255, 255, 100, 255));
+
+                    ev.StrokeThickness = 2;
+
+                    viewport_canvas.Children.Add(ev);
+
+
+                    var lab = new System.Windows.Controls.TextBlock();
+                    lab.Text = string.Format("{0}  {1}  {2}", e.ID.ToString("000"), e.type.ToString(), ((byte)e.type).ToString("X2"));
+                    lab.Margin = new Thickness(e.position.X + 8, e.position.Y - 6, e.position.X + 100, e.position.Y + 15);
+                    if (!e.selected)
+                        lab.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromArgb(100, 255, 231, 148));
+                    else
+                        lab.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromArgb(255, 255, 100, 255));
+                    lab.FontSize = 9;
+                    viewport_canvas.Children.Add(lab);
+                }
+            }
+        }
+
+
+
+
         void UpdateViewport(object sender, EventArgs e)
         {
             Refresh();
@@ -106,29 +147,11 @@ namespace RayTwol
                     }
                 }
 
-            // Events
-            viewport_canvas.Children.Clear();
-            viewport_canvas.Children.Add(Editor.selSquare);
-            foreach (Event e in Editor.activeTypeGroup.events)
-            {
-                var ev = new System.Windows.Shapes.Ellipse();
-                int size = 9;
-                ev.Width = size;
-                ev.Height = size;
-                ev.Margin = new Thickness(e.position.X, e.position.Y, 0, 0);
-                ev.Stroke = new SolidColorBrush(System.Windows.Media.Color.FromArgb(255, 255, 255, 255));
-                ev.StrokeThickness = 2;
-                viewport_canvas.Children.Add(ev);
-            }
-
-
+            RefreshEvents();
             Editor.types_screen = Editor.activeTypeGroup.types.ToArray();
 
             Rendering.Render();
             viewport.Source = Rendering.display;
-
-            label_mapsize.Content = Editor.activeTypeGroup.width + "×" + Editor.Scenes.Level.height;
-            label_mapname.Content = Editor.currLevel;
         }
     }
 }
