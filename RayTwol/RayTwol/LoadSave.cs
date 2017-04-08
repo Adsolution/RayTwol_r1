@@ -95,9 +95,10 @@ namespace RayTwol
                 for (int b = 0; b < 0x70; b++)
                     ev.bytes[b] = XXX[b + e];
 
-                off_types -= 112;
-                off_sprites -= 112;
-                off_end -= 112;
+                off_types -= 113;
+                off_sprites -= 113;
+                off_end -= 113;
+
                 count_events++;
             }
             RefreshObjectsList();
@@ -210,6 +211,87 @@ namespace RayTwol
         }
 
 
+        public static void SaveLevelNew(string suffix = "")
+        {
+            int evecount = count_events;
+            //evecount = 71;
+
+            uint o_off = 0x04;
+            uint o_bgo = 0x18;
+            uint o_eve = 0x198;
+            uint o_map = (uint)(o_eve + 16 + (evecount * 0x70) + evecount + 1);
+            uint o_tex = (uint)(o_map + 4 + (2 * (Scenes.Level.width * Scenes.Level.height)));
+            uint o_end = o_tex + 1;
+            
+            string folderName = new string(new char[] { currLevel.ToCharArray()[0], currLevel.ToCharArray()[1], currLevel.ToCharArray()[2] });
+            string fullName = string.Format("RAY\\{0}\\{1}.XXX_new", folderName, currLevel);
+
+            var file = new FileStream(fullName, FileMode.OpenOrCreate);
+            file.SetLength(o_end);
+
+
+            // Offsets
+            file.Write(BitConverter.GetBytes(o_off), 0, 4);
+            file.Write(BitConverter.GetBytes(o_bgo), 0, 4);
+            file.Write(BitConverter.GetBytes(o_eve), 0, 4);
+            file.Write(BitConverter.GetBytes(o_map), 0, 4);
+            file.Write(BitConverter.GetBytes(o_tex), 0, 4);
+            file.Write(BitConverter.GetBytes(o_end), 0, 4);
+
+
+            // Events header
+            file.Position = o_eve;
+            {
+                // read memory offset
+                var wfile = new FileStream(string.Format("RAY\\{0}\\{0}.XXX", world), FileMode.Open);
+                byte[] memoff = new byte[4];
+                wfile.Position = 8;
+                wfile.Read(memoff, 0, 4);
+                wfile.Close();
+
+                // write event memory start
+                file.Write(BitConverter.GetBytes(0x800A5014 + BitConverter.ToUInt32(memoff, 0)), 0, 4);
+                // write event count
+                file.Write(BitConverter.GetBytes((uint)evecount), 0, 4);
+                // write event memory end
+                file.Write(BitConverter.GetBytes(0x800A5014 + BitConverter.ToUInt32(memoff, 0) + (evecount * 0x70)), 0, 4);
+                // write event count (2)
+                file.Write(BitConverter.GetBytes((uint)evecount), 0, 4);
+            }
+
+            // Event definitions
+            for (int e = 0; e < evecount; e++)
+            {
+                //file.Write(Scenes.Level.events[e].bytes, 0, 0x70);
+                for (int i = 0; i < 112; i++)
+                    file.WriteByte(0);
+            }
+                
+
+            // Event links
+            for (byte e = 0; e < evecount; e++)
+                file.WriteByte(e);
+            file.WriteByte(0);
+
+
+            // UNKNOWN event info
+
+
+            // Map data
+            file.Write(BitConverter.GetBytes((ushort)Scenes.Level.width), 0, 2);
+            file.Write(BitConverter.GetBytes((ushort)Scenes.Level.height), 0, 2);
+            foreach (Type t in Scenes.Level.types)
+            {
+                int graphic = t.graphic.X + (t.graphic.Y << 4);
+                file.WriteByte((byte)graphic);
+                file.WriteByte((byte)(((byte)t.collision << 2) + (graphic >> 8)));
+            }
+
+
+            file.Close();
+        }
+
+
         public static void SaveLevel(string suffix = "")
         {
             Mouse.OverrideCursor = Cursors.Wait;
@@ -217,6 +299,7 @@ namespace RayTwol
             // LEVEL
             if (activeTypeGroup == Scenes.Level)
             {
+                
                 string folderName = new string(new char[] { currLevel.ToCharArray()[0], currLevel.ToCharArray()[1], currLevel.ToCharArray()[2] });
                 string fullName = string.Format("RAY\\{0}\\{1}.XXX", folderName, currLevel);
                 FileStream mapFileTemp = new FileStream(fullName, FileMode.Open);
@@ -227,8 +310,11 @@ namespace RayTwol
                 var XXX = XXXa.ToList();
 
                 XXX.RemoveRange(off_events + 16, count_events * 112);
+                XXX.RemoveRange(off_events + 16, count_events);
 
                 count_events = 0;
+
+                // Events list
                 foreach (Event e in Scenes.Level.events)
                 {
                     if (e.inLevel)
@@ -242,12 +328,56 @@ namespace RayTwol
                     }
 
                     XXX.InsertRange(off_events + 16 + (count_events * 112), e.bytes.ToList());
-                    off_types += 112;
-                    off_sprites += 112;
-                    off_end += 112;
+                    off_types += 113;
+                    off_sprites += 113;
+                    off_end += 113;
                     count_events++;
                 }
 
+                // Events counter
+                for (int e = 0; e < count_events; e++)
+                    XXX.Insert(off_events + 16 + (count_events * 112) + e, (byte)e);
+
+                // Events header
+                {
+                    // counter determiners
+                    byte[] b = BitConverter.GetBytes((uint)count_events);
+
+                    XXX[off_events + 04] = b[0];
+                    XXX[off_events + 05] = b[1];
+                    XXX[off_events + 06] = b[2];
+                    XXX[off_events + 07] = b[3];
+
+                    XXX[off_events + 12] = b[0];
+                    XXX[off_events + 13] = b[1];
+                    XXX[off_events + 14] = b[2];
+                    XXX[off_events + 15] = b[3];
+
+                    // weird list offsets
+                    var wfile = new FileStream(string.Format("RAY\\{0}\\{0}.XXX", world), FileMode.Open);
+                    byte[] data = new byte[4];
+                    wfile.Position = 8;
+                    wfile.Read(data, 0, 4);
+                    wfile.Close();
+                    uint a = 0x800A5014 + BitConverter.ToUInt32(data, 0);
+                    b = BitConverter.GetBytes(a);
+
+                    XXX[off_events + 00] = b[0];
+                    XXX[off_events + 01] = b[1];
+                    XXX[off_events + 02] = b[2];
+                    XXX[off_events + 03] = b[3];
+
+                    a += (uint)count_events * 112;
+                    b = BitConverter.GetBytes(a);
+
+                    XXX[off_events + 08] = b[0];
+                    XXX[off_events + 09] = b[1];
+                    XXX[off_events + 10] = b[2];
+                    XXX[off_events + 11] = b[3];
+                }
+                
+
+                // Update offsets
                 var write_off_types = (BitConverter.GetBytes((uint)off_types));
                 for (int i = 0; i < 4; i++)
                     XXX[0xC + i] = write_off_types[i];
@@ -270,13 +400,28 @@ namespace RayTwol
                     XXX[off_types + 4 + (typeCount * 2) + 1] = byte2;
                     typeCount++;
                 }
-
                 File.Delete(fullName + suffix);
                 FileStream mapFile = new FileStream(fullName + suffix, FileMode.Create);
                 mapFile.Write(XXX.ToArray(), 0, XXX.Count);
                 mapFile.Close();
 
                 OpenLevel(currLevel);
+
+                /*
+                var file = new FileStream("level.t", FileMode.OpenOrCreate);
+                var w = BitConverter.GetBytes((ushort)Scenes.Level.width);
+                var h = BitConverter.GetBytes((ushort)Scenes.Level.height);
+                file.WriteByte(w[0]);
+                file.WriteByte(w[1]);
+                file.WriteByte(h[0]);
+                file.WriteByte(h[1]);
+                foreach (Type t in Scenes.Level.types)
+                {
+                    file.WriteByte((byte)t.collision);
+                    file.WriteByte((byte)t.graphic.X);
+                    file.WriteByte((byte)t.graphic.Y);
+                }
+                file.Close();*/
             }
 
             // TEMPLATE

@@ -441,7 +441,7 @@
                 <Image x:Name="viewport" HorizontalAlignment="Left" MouseDown="viewport_MouseDown" MouseMove="viewport_MouseMove" Panel.ZIndex="0" MouseUp="viewport_MouseUp"/>
             </StackPanel>
         </ScrollViewer>
-        <Button x:Name="button_grid" Content="Grid" HorizontalAlignment="Left" Margin="567,10,0,0" Width="62" BorderBrush="#FF411E3F" Foreground="#FFFFA200" FontSize="16" FontWeight="Bold" Click="button_grid_click" Focusable="False" Height="28" VerticalAlignment="Top">
+        <Button x:Name="button_grid" Content="Grid" HorizontalAlignment="Left" Margin="644,10,0,0" Width="62" BorderBrush="#FF411E3F" Foreground="#FFFFA200" FontSize="16" FontWeight="Bold" Click="button_grid_click" Focusable="False" Height="28" VerticalAlignment="Top">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF1D0918" Offset="1"/>
@@ -709,7 +709,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <ToggleButton x:Name="togglebutton_events" Content="Events" HorizontalAlignment="Left" Margin="333,10,0,0" Width="75" BorderBrush="#FF3A0917" Foreground="#FF9590FF" FontSize="16" Height="28" VerticalAlignment="Top" FontWeight="Bold" Click="togglebutton_events_Click" IsChecked="True">
+        <ToggleButton x:Name="togglebutton_events" Content="Events" HorizontalAlignment="Left" Margin="488,10,0,0" Width="74" BorderBrush="#FF3A0917" Foreground="#FFFF90F5" FontSize="16" Height="28" VerticalAlignment="Top" FontWeight="Bold" Click="togglebutton_events_Click" IsChecked="True">
             <ToggleButton.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF1F000F" Offset="1"/>
@@ -718,7 +718,7 @@
             </ToggleButton.Background>
 
         </ToggleButton>
-        <ToggleButton x:Name="togglebutton_graphics" Content="Graphics" HorizontalAlignment="Left" Margin="410,10,0,0" Width="75" BorderBrush="#FF3A0917" Foreground="#FF04B624" FontSize="16" Height="28" VerticalAlignment="Top" FontWeight="Bold" Click="togglebutton_graphics_Click">
+        <ToggleButton x:Name="togglebutton_graphics" Content="Graphics" HorizontalAlignment="Left" Margin="334,10,0,0" Width="75" BorderBrush="#FF3A0917" Foreground="#FF04B624" FontSize="16" Height="28" VerticalAlignment="Top" FontWeight="Bold" Click="togglebutton_graphics_Click">
             <ToggleButton.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF1F000F" Offset="1"/>
@@ -727,7 +727,7 @@
             </ToggleButton.Background>
 
         </ToggleButton>
-        <ToggleButton x:Name="togglebutton_collision" Content="Collision" HorizontalAlignment="Left" Margin="487,10,0,0" Width="75" BorderBrush="#FF3A0917" Foreground="#FFFF4A4A" FontSize="16" Height="28" VerticalAlignment="Top" FontWeight="Bold" Click="togglebutton_collision_Click">
+        <ToggleButton x:Name="togglebutton_collision" Content="Collision" HorizontalAlignment="Left" Margin="411,10,0,0" Width="75" BorderBrush="#FF3A0917" Foreground="#FFFF4A4A" FontSize="16" Height="28" VerticalAlignment="Top" FontWeight="Bold" Click="togglebutton_collision_Click">
             <ToggleButton.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF1F000F" Offset="1"/>
@@ -739,6 +739,23 @@
         <Button x:Name="button_AddEvent" Content="Add Event" HorizontalAlignment="Left" Width="210" BorderBrush="#FF411E3F" Foreground="#FFFF0080" FontSize="16" Height="26" VerticalAlignment="Bottom" FontWeight="Bold" Click="button_AddEvent_Click" Focusable="False" Margin="12,0,0,115">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="#FF1D0918" Offset="1"/>
+                    <GradientStop Color="#FF462844"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <ToggleButton x:Name="togglebutton_linking" Content="Linking" HorizontalAlignment="Left" Margin="564,10,0,0" Width="74" BorderBrush="#FF3A0917" Foreground="#FF68BAFF" FontSize="16" Height="28" VerticalAlignment="Top" FontWeight="Bold" Click="togglebutton_events_Click">
+            <ToggleButton.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF1F000F" Offset="1"/>
+                    <GradientStop Color="#FF5D0037"/>
+                </LinearGradientBrush>
+            </ToggleButton.Background>
+
+        </ToggleButton>
+        <Button x:Name="button_savenew" Content="SaveNewTest" HorizontalAlignment="Left" Margin="753,10,0,0" Width="106" BorderBrush="#FF411E3F" Foreground="#FFFFA200" FontSize="16" FontWeight="Bold" Click="button_savenewtest" Focusable="False" Height="28" VerticalAlignment="Top">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF1D0918" Offset="1"/>
                     <GradientStop Color="#FF462844"/>
                 </LinearGradientBrush>

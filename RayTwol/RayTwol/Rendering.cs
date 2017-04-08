@@ -82,9 +82,15 @@ namespace RayTwol
                     lab.Text = string.Format("{0}  {1}  {2}", e.ID.ToString("000"), e.type.ToString(), ((byte)e.type).ToString("X2"));
                     lab.Margin = new Thickness(e.position.X + 8, e.position.Y - 6, e.position.X + 100, e.position.Y + 15);
                     if (!e.selected)
+                    {
                         lab.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromArgb(100, 255, 231, 148));
+                        lab.Background = new SolidColorBrush(System.Windows.Media.Color.FromArgb(100, 0, 0, 0));
+                    }
                     else
+                    {
                         lab.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromArgb(255, 255, 100, 255));
+                        lab.Background = new SolidColorBrush(System.Windows.Media.Color.FromArgb(200, 0, 0, 0));
+                    }
                     lab.FontSize = 9;
                     viewport_canvas.Children.Add(lab);
                 }

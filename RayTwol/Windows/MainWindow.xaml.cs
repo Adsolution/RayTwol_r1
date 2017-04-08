@@ -97,5 +97,10 @@ namespace RayTwol
             var eventSelect = new EventSelect();
             eventSelect.ShowDialog();
         }
+
+        private void button_savenewtest(object sender, RoutedEventArgs e)
+        {
+            Editor.SaveLevelNew();
+        }
     }
 }

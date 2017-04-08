@@ -90,8 +90,8 @@ namespace RayTwol
             for (int fy = 0; fy < (off_palette - off_tiles) / 4096; fy++, buffPos += 256 * 15)
                 for (int fx = 0; fx < 16; fx++, buffPos -= 0xFF0, tile++)
                 {
-                    var bmp = new Bitmap(16, 16, System.Drawing.Imaging.PixelFormat.Format8bppIndexed);
-                    var bitmapData = bmp.LockBits(new Rectangle(System.Drawing.Point.Empty, bmp.Size), ImageLockMode.ReadWrite, bmp.PixelFormat);
+                    var bmp = new Bitmap(16, 16, PixelFormat.Format8bppIndexed);
+                    var bitmapData = bmp.LockBits(new Rectangle(Point.Empty, bmp.Size), ImageLockMode.ReadWrite, bmp.PixelFormat);
                     byte[] buffer = new byte[bmp.Width * bmp.Height];
 
                     for (int y = 0; y < 16; y++, buffPos += 256 - 16)
@@ -118,12 +118,12 @@ namespace RayTwol
                     }
                     catch { }
 
-                    bmp.MakeTransparent(System.Drawing.Color.FromArgb(0, 0, 0));
+                    bmp.MakeTransparent(Color.FromArgb(0, 0, 0));
                     tiles.Add(bmp);
                     //bmp.Save(string.Format("{0}\\{1}\\{3}_{2}.png", ExtractDir, world, fx, fy), ImageFormat.Png);
                 }
 
-            var ts = new Bitmap(256, (off_palette - off_tiles) / 256, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+            var ts = new Bitmap(256, (off_palette - off_tiles) / 256, PixelFormat.Format32bppArgb);
             int posX = 0;
             int posY = 0;
             for (int bmp = 0; bmp < tiles.Count; bmp++)
@@ -144,8 +144,9 @@ namespace RayTwol
             }
 
             tileset = ts;
+            
             //Directory.CreateDirectory(ExtractDir);
-            //Level.tileset.Save(string.Format("{0}\\{1}.png", ExtractDir, world), ImageFormat.Png);
+            //tileset.Save(string.Format("{0}\\{1}.png", ExtractDir, world), ImageFormat.Png);
         }
     }
 }
